@@ -1,49 +1,158 @@
 <div class="doughnut-chart-wrapper">
-  <h3 class="chart-title">{{ title }}</h3>
+  <!-- <h3 class="chart-title">{{ title }}</h3>title -->
   <div class="chart-container">
-    <!-- Custom SVG Doughnut Chart -->
-    <svg [attr.viewBox]="'0 0 200 200'" class="doughnut-svg">
-      <circle 
-        cx="100" 
-        cy="100" 
-        [attr.r]="radius"
-        fill="none"
-        [attr.stroke]="getSegmentColor(i)"
-        [attr.stroke-width]="strokeWidth"
-        [attr.stroke-dasharray]="getStrokeDasharray(i)"
-        [attr.stroke-dashoffset]="getStrokeDashoffset(i)"
-        [attr.transform]="'rotate(-90 100 100)'"
-        class="doughnut-segment"
-        [attr.data-label]="labels[i]"
-        [attr.data-value]="data[i]"
-        *ngFor="let item of data; let i = index">
-      </circle>
-      <!-- Sector name labels on segments -->
-      <text 
-        *ngFor="let item of data; let i = index"
-        [attr.x]="getLabelX(i)"
-        [attr.y]="getLabelY(i)"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        class="segment-label">
-        {{ labels[i] }}
-      </text>
-      <!-- Center text -->
-      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" class="center-text">
-        {{ selectedLabel }}
-      </text>
-    </svg>
-    
-    <!-- Legend -->
-    <!-- <div class="legend">
-      <div class="legend-item" 
-        *ngFor="let label of labels; let i = index"
-        (click)="selectSegment(i)"
-        [class.active]="selectedIndex === i">
-        <div class="legend-color" [style.backgroundColor]="getSegmentColor(i)"></div>
-        <span class="legend-label">{{ label }}</span>
-        <span class="legend-value">{{ data[i] }}</span>
+    <div class="d-flex flex-column h-100 justify-content-center align-items-center">
+      <div id="sunburst_chart" #sunburstChart>
+        <svg id="donut" #sunburstSvg [attr.width]="svgSize" [attr.height]="svgHeight" class="doughnut-svg" role="img" aria-label="{{title}}">
+
+          <pattern id="pattern_1_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_1_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_1_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_1_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <defs>
+            <radialGradient id="g">
+              <stop stop-color="#fff" offset="1"></stop>
+              <stop stop-color="rgba(255,255,255, 0.5)" offset="0.8"></stop>
+            </radialGradient>
+            <filter id="sofGlow" width="300%" height="300%" x="-100%" y="-100%">
+              <feGaussianBlur in="thicken" stdDeviation="6" result="blurred"></feGaussianBlur>
+            </filter>
+          </defs>
+
+          <pattern id="pattern_2_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_2_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_2_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_2_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_3_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_3_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_3_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_3_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_4_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_4_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_4_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_4_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_5_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_5_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_5_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_5_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_6_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_6_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_6_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_6_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_7_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_7_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_7_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_7_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_8_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_8_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_8_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_8_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_9_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_9_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_9_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_9_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <pattern id="pattern_10_grad" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_10_grad.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+          <pattern id="pattern_10_grad_active" width="100%" height="100%" patternContentUnits="objectBoundingBox">
+            <image href="assets/img/homepage/sector_wheel/image_10_grad_active.png" width="1" height="1" preserveAspectRatio="none"></image>
+          </pattern>
+
+          <g transform="translate(264.5,279.5)">
+            <g>
+              <circle cx="0" cy="0" r="239.84285714285716" fill="#fff" pointer-events="none" opacity="1"></circle>
+              <path fill="url(#pattern_1_grad_active)" class="donutPath arcs sunburst-zoom-in" path-text="MSME" path-index="0" d="M1.4258387732929898e-14,-232.85714285714286A232.85714285714286,232.85714285714286,0,0,1,136.86999446239017,-188.3853858330235L66.84348566767892,-92.00216517426729A113.72093023255815,113.72093023255815,0,0,0,6.96339866026809e-15,-113.72093023255815Z" style="cursor: pointer;"><title>MSME</title></path>
+              <path fill="url(#pattern_2_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Skilling Livelihoods &amp; Labour Welfare" path-index="1" d="M136.86999446239017,-188.3853858330235A232.85714285714286,232.85714285714286,0,0,1,221.4603030801572,-71.95681440445203L108.15503173682096,-35.1417000579882A113.72093023255815,113.72093023255815,0,0,0,66.84348566767892,-92.00216517426729Z" style="cursor: pointer;"><title>Skilling Livelihoods &amp; Labour Welfare</title></path>
+              <path fill="url(#pattern_3_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Tourism" path-index="2" d="M221.4603030801572,-71.95681440445203A232.85714285714286,232.85714285714286,0,0,1,221.4603030801572,71.95681440445203L108.15503173682096,35.1417000579882A113.72093023255815,113.72093023255815,0,0,0,108.15503173682096,-35.1417000579882Z" style="cursor: pointer;"><title>Tourism</title></path>
+              <path fill="url(#pattern_4_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Education" path-index="3" d="M221.4603030801572,71.95681440445203A232.85714285714286,232.85714285714286,0,0,1,136.86999446239017,188.3853858330235L66.84348566767892,92.00216517426729A113.72093023255815,113.72093023255815,0,0,0,108.15503173682096,35.1417000579882Z" style="cursor: pointer;"><title>Education</title></path>
+              <path fill="url(#pattern_5_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Manufacturing" path-index="4" d="M136.86999446239017,188.3853858330235A232.85714285714286,232.85714285714286,0,0,1,1.4258387732929898e-14,232.85714285714286L6.96339866026809e-15,113.72093023255815A113.72093023255815,113.72093023255815,0,0,0,66.84348566767892,92.00216517426729Z" style="cursor: pointer;"><title>Manufacturing</title></path>
+              <path fill="url(#pattern_6_grad)" class="donutPath arcs" path-text="Energy" path-index="5" d="M1.4258387732929898e-14,232.85714285714286A232.85714285714286,232.85714285714286,0,0,1,-136.86999446239014,188.3853858330235L-66.84348566767892,92.00216517426729A113.72093023255815,113.72093023255815,0,0,0,6.96339866026809e-15,113.72093023255815Z" style="cursor: pointer;"><title>Energy</title></path>
+              <path fill="url(#pattern_7_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Urbanization" path-index="6" d="M-136.86999446239014,188.3853858330235A232.85714285714286,232.85714285714286,0,0,1,-221.4603030801572,71.95681440445206L-108.15503173682096,35.14170005798822A113.72093023255815,113.72093023255815,0,0,0,-66.84348566767892,92.00216517426729Z" style="cursor: pointer;"><title>Urbanization</title></path>
+              <path fill="url(#pattern_8_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Agriculture &amp; Allied Services" path-index="7" d="M-221.4603030801572,71.95681440445206A232.85714285714286,232.85714285714286,0,0,1,-221.46030308015722,-71.95681440445202L-108.15503173682097,-35.141700057988196A113.72093023255815,113.72093023255815,0,0,0,-108.15503173682096,35.14170005798822Z" style="cursor: pointer;"><title>Agriculture &amp; Allied Services</title></path>
+              <path fill="url(#pattern_9_grad)" class="donutPath arcs sunburst-zoom-out" path-text="Health &amp; Nutrition" path-index="8" d="M-221.46030308015722,-71.95681440445202A232.85714285714286,232.85714285714286,0,0,1,-136.8699944623902,-188.38538583302346L-66.84348566767893,-92.00216517426728A113.72093023255815,113.72093023255815,0,0,0,-108.15503173682097,-35.141700057988196Z" style="cursor: pointer;"><title>Health &amp; Nutrition</title></path>
+              <path fill="url(#pattern_10_grad)" class="donutPath arcs" path-text="Water &amp; WASH" path-index="9" d="M-136.8699944623902,-188.38538583302346A232.85714285714286,232.85714285714286,0,0,1,-4.2775163198789693e-14,-232.85714285714286L-2.0890195980804268e-14,-113.72093023255815A113.72093023255815,113.72093023255815,0,0,0,-66.84348566767893,-92.00216517426728Z" style="cursor: pointer;"><title>Water &amp; WASH</title></path>
+              <circle cx="0" cy="0" r="125.09302325581397" fill="none" pointer-events="none" stroke-width="19.56" stroke="url('#g')" filter="url('#sofGlow')" opacity="0.5"></circle>
+              <g pointer-events="none" text-anchor="middle" style="user-select: none;">
+                <text dy="-0.85em" dx="0.2em" class="sunburst-label-text label_msme_1" translate-tag="sunburst_msme_1" transform="translate(53.549257231220125 -164.80766740848907)" full-text="MSME" style="font-weight: 500;">MSME</text>
+                <text dy="-0.35em" dx="" class="sunburst-label-text label_skilling_livelihoods_and_labour_welfare_1" translate-tag="sunburst_skilling_livelihoods_and_labour_welfare_1" transform="translate(140.19377550364538 -101.85674006503454)" full-text="Skilling Livelihoods &amp; Labour Welfare" style="font-weight: 500;">Skilling</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_tourism_1" translate-tag="sunburst_tourism_1" transform="translate(173.2890365448505 0)" full-text="Tourism" style="font-weight: 500;">Tourism</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_education_1" translate-tag="sunburst_education_1" transform="translate(140.19377550364538 101.85674006503454)" full-text="Education" style="font-weight: 500;">Education</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_manufacturing_1" translate-tag="sunburst_manufacturing_1" transform="translate(53.549257231220125 164.80766740848907)" full-text="Manufacturing" style="font-weight: 500;">Manufacturing</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_energy_1" translate-tag="sunburst_energy_1" transform="translate(-53.54925723122011 164.80766740848907)" full-text="Energy" style="font-weight: 500;">Energy</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_urbanization_1" translate-tag="sunburst_urbanization_1" transform="translate(-140.19377550364536 101.85674006503456)" full-text="Urbanization" style="font-weight: 500;">Urbanization</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_agriculture_and_allied_services_1" translate-tag="sunburst_agriculture_and_allied_services_1" transform="translate(-173.2890365448505 2.1221786393197987e-14)" full-text="Agriculture &amp; Allied Services" style="font-weight: 500;">Agriculture and</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_health_and_nutrition_1" translate-tag="sunburst_health_and_nutrition_1" transform="translate(-140.19377550364538 -101.85674006503453)" full-text="Health &amp; Nutrition" style="font-weight: 500;">Health and</text>
+                <text dy="0.35em" dx="" class="sunburst-label-text label_water_and_wash_1" translate-tag="sunburst_water_and_wash_1" transform="translate(-53.549257231220146 -164.80766740848907)" full-text="Water &amp; WASH" style="font-weight: 500;">Water and</text>
+              </g>
+              <g pointer-events="none" text-anchor="middle" style="user-select: none;">
+                <text dy="" dx="" class="sunburst-label-text label_msme_2" translate-tag="sunburst_msme_2" transform="translate(53.549257231220125 -136.80766740848907)" full-text="MSME" style="font-weight: 500;"></text>
+                <text dy="-1.2em" dx="-0.50em" class="sunburst-label-text label_skilling_livelihoods_and_labour_welfare_2" translate-tag="sunburst_skilling_livelihoods_and_labour_welfare_2" transform="translate(150.19377550364538 -73.85674006503454)" full-text="Skilling Livelihoods &amp; Labour Welfare" style="font-weight: 500;">Livelihoods and</text>
+                <text dy="" dx="" class="sunburst-label-text label_tourism_2" translate-tag="sunburst_tourism_2" transform="translate(173.2890365448505 28)" full-text="Tourism" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_education_2" translate-tag="sunburst_education_2" transform="translate(140.19377550364538 129.85674006503456)" full-text="Education" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_manufacturing_2" translate-tag="sunburst_manufacturing_2" transform="translate(53.549257231220125 192.80766740848907)" full-text="Manufacturing" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_energy_2" translate-tag="sunburst_energy_2" transform="translate(-53.54925723122011 192.80766740848907)" full-text="Energy" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_urbanization_2" translate-tag="sunburst_urbanization_2" transform="translate(-140.19377550364536 129.85674006503456)" full-text="Urbanization" style="font-weight: 500;"></text>
+                <text dy="-0.40em" dx="-0.15em" class="sunburst-label-text label_agriculture_and_allied_services_2" translate-tag="sunburst_agriculture_and_allied_services_2" transform="translate(-173.2890365448505 28.00000000000002)" full-text="Agriculture &amp; Allied Services" style="font-weight: 500;">Allied Services</text>
+                <text dy="-0.4em" dx="-0.15em" class="sunburst-label-text label_health_and_nutrition_2" translate-tag="sunburst_health_and_nutrition_2" transform="translate(-140.19377550364538 -73.85674006503453)" full-text="Health &amp; Nutrition" style="font-weight: 500;">Nutrition</text>
+                <text dy="-0.4em" dx="-0.15em" class="sunburst-label-text label_water_and_wash_2" translate-tag="sunburst_water_and_wash_2" transform="translate(-53.549257231220146 -136.80766740848907)" full-text="Water &amp; WASH" style="font-weight: 500;">Wash</text>
+              </g>
+              <g pointer-events="none" text-anchor="middle" style="user-select: none;">
+                <text dy="" dx="" class="sunburst-label-text label_msme_3" translate-tag="sunburst_msme_3" transform="translate(53.549257231220125 -136.80766740848907)" full-text="MSME" style="font-weight: 500;"></text>
+                <text dy="0.15em" dx="-0.50em" class="sunburst-label-text label_skilling_livelihoods_and_labour_welfare_3" translate-tag="sunburst_skilling_livelihoods_and_labour_welfare_3" transform="translate(150.19377550364538 -73.85674006503454)" full-text="Skilling Livelihoods &amp; Labour Welfare" style="font-weight: 500;">Labour Welfare</text>
+                <text dy="" dx="" class="sunburst-label-text label_tourism_3" translate-tag="sunburst_tourism_3" transform="translate(173.2890365448505 28)" full-text="Tourism" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_education_3" translate-tag="sunburst_education_3" transform="translate(140.19377550364538 129.85674006503456)" full-text="Education" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_manufacturing_3" translate-tag="sunburst_manufacturing_3" transform="translate(53.549257231220125 192.80766740848907)" full-text="Manufacturing" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_energy_3" translate-tag="sunburst_energy_3" transform="translate(-53.54925723122011 192.80766740848907)" full-text="Energy" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_urbanization_3" translate-tag="sunburst_urbanization_3" transform="translate(-140.19377550364536 129.85674006503456)" full-text="Urbanization" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_agriculture_and_allied_services_3" translate-tag="sunburst_agriculture_and_allied_services_3" transform="translate(-173.2890365448505 28.00000000000002)" full-text="Agriculture &amp; Allied Services" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_health_and_nutrition_3" translate-tag="sunburst_health_and_nutrition_3" transform="translate(-140.19377550364538 -73.85674006503453)" full-text="Health &amp; Nutrition" style="font-weight: 500;"></text>
+                <text dy="" dx="" class="sunburst-label-text label_water_and_wash_3" translate-tag="sunburst_water_and_wash_3" transform="translate(-53.549257231220146 -136.80766740848907)" full-text="Water &amp; WASH" style="font-weight: 500;"></text>
+              </g>
+              <g pointer-events="none" text-anchor="middle" style="user-select: none;">
+                <image class="" transform="translate(73.54925723122012 -189.80766740848907)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_0"></image>
+                <image class="d-none" transform="translate(202.19377550364538 -98.85674006503454)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_1"></image>
+                <image class="d-none" transform="translate(207.2890365448505 -15)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_2"></image>
+                <image class="d-none" transform="translate(178.19377550364538 97.85674006503454)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_3"></image>
+                <image class="d-none" transform="translate(98.54925723122012 165.80766740848907)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_4"></image>
+                <image class="d-none" transform="translate(-33.54925723122011 166.80766740848907)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_5"></image>
+                <image class="d-none" transform="translate(-108.19377550364536 96.85674006503456)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_6"></image>
+                <image class="d-none" transform="translate(-145.2890365448505 6.000000000000021)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_7"></image>
+                <image class="d-none" transform="translate(-122.19377550364538 -107.85674006503453)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_8"></image>
+                <image class="d-none" transform="translate(-35.549257231220146 -170.80766740848907)" href="assets/img/icons/chevron_right_active.svg" dx="0" width="4%" dy="20" id="arc_img_9"></image>
+              </g>
+            </g>
+            <g class="arc"></g>
+            <image class="center-image" xlink:href="assets/img/homepage/ashoka-stambh.svg" x="-36" y="-58" width="75" clip-path="inset(0% round 50px)" pointer-events="none" height="117"></image>
+          </g>
+        </svg>
       </div>
-    </div> -->
+      <div class="center-label" *ngIf="selectedLabel" aria-live="polite">{{ selectedLabel }}</div>
+    </div>
   </div>
 </div>
