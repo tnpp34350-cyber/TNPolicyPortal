@@ -1,0 +1,53 @@
+.admin-console { padding: 32px 20px; background: #f7fbfc; min-height: 60vh; }
+.admin-console .container { max-width: 1100px; margin: 0 auto; }
+.admin-console .title { font-size: 32px; margin: 0 0 6px 0; color: #062c33 }
+.admin-console .lead { color: #556; margin: 0 0 18px 0 }
+.admin-layout { display:flex; gap:20px; align-items:flex-start; }
+.admin-sidebar { width:260px; background:#fff; border-radius:10px; padding:12px; box-shadow:0 6px 18px rgba(6,40,50,0.04) }
+.filter-block { margin-bottom:18px }
+.filter-block h4 { margin:0 0 8px 0; font-size:15px }
+.filter-list { display:flex; flex-direction:column; gap:6px; max-height:44vh; overflow:auto }
+.filter-item { font-size:14px; display:flex; gap:8px; align-items:center }
+
+.admin-main { flex:1 }
+.admin-actions { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px }
+.btn { background:#eef6f8; border:1px solid #dbeff2; padding:6px 10px; border-radius:6px; cursor:pointer }
+.btn.primary { background:#0b728a; color:#fff; border-color:#0b728a }
+
+.table-wrap { background:#fff; padding:8px; border-radius:8px; box-shadow:0 6px 18px rgba(6,40,50,0.04) }
+.admin-table { width:100%; border-collapse:collapse }
+.admin-table th, .admin-table td { text-align:left; padding:10px 12px; border-bottom:1px solid #f0f4f5 }
+.admin-table thead th { background:#fbfeff }
+.no-data { text-align:center; padding:18px; color:#667 }
+
+@media (max-width: 900px) {
+	.admin-layout { flex-direction:column }
+	.admin-sidebar { width:100%; order:2 }
+}
+
+/* Hero and KPI styles */
+.admin-hero { display:flex; justify-content:space-between; align-items:center; gap:18px; margin-bottom:18px; padding:18px; border-radius:12px; background: linear-gradient(90deg,#0b728a 0%, #51c2d6 100%); color: #fff }
+.admin-hero .hero-left h2 { margin:0; font-size:20px }
+.admin-hero .hero-left p { margin:6px 0 0 0; opacity:0.95 }
+.hero-kpis { display:flex; gap:12px; align-items:center }
+.kpi { background: rgba(255,255,255,0.08); padding:12px 14px; border-radius:10px; min-width:96px; text-align:center }
+.kpi-value { font-weight:800; font-size:18px }
+.kpi-label { font-size:12px; opacity:0.9 }
+
+/* pill filters */
+.filter-pills { display:flex; flex-wrap:wrap; gap:8px }
+.pill { padding:6px 10px; border-radius:16px; border:1px solid #e6eef0; background:#f6fafa; cursor:pointer; font-size:13px }
+.pill.active { background:#0b728a; color:#fff; border-color:#0b728a; transform:translateY(-2px); box-shadow:0 8px 20px rgba(11,114,138,0.12) }
+
+/* polished table */
+.admin-table tbody tr:nth-child(odd) { background: #fbfeff }
+.admin-table tbody tr:hover { background: #eef8fa; transform: translateX(0); }
+.policy-badge { display:inline-block; background:#eef6f8; color:#0b728a; padding:4px 8px; border-radius:12px; font-size:12px; margin-right:6px }
+.admin-table td:first-child { width:48px }
+.admin-table td:last-child { width:180px }
+
+.search-wrap { margin-bottom:12px }
+.search { width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6eef0 }
+
+.admin-hero .kpi { transition: transform 160ms ease }
+.admin-hero .kpi:hover { transform: translateY(-6px) }

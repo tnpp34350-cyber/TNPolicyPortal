@@ -20,32 +20,19 @@
       </div>
 
       <div class="auth-form">
-        <div class="auth-tabs">
-          <button [class.active]="mode==='sign-in'" (click)="mode='sign-in'">Sign In</button>
-          <button [class.active]="mode==='sign-up'" (click)="mode='sign-up'">Sign Up</button>
-        </div>
-
         <form (ngSubmit)="submit()">
-          <div *ngIf="mode==='sign-up'" class="form-row">
-            <label>Full name</label>
-            <input [(ngModel)]="name" name="name" required />
-          </div>
-
           <div class="form-row">
             <label>Email</label>
-            <input [(ngModel)]="email" name="email" type="email" required />
+            <input [(ngModel)]="email" name="email" type="email" />
           </div>
 
           <div class="form-row">
             <label>Password</label>
-            <input [(ngModel)]="password" name="password" type="password" required />
+            <input [(ngModel)]="password" name="password" type="password" />
           </div>
 
           <div class="form-row actions">
-            <button class="btn primary" type="submit">{{ mode === 'sign-in' ? 'Sign In' : 'Create Account' }}</button>
-            <button type="button" class="btn ghost" (click)="mode = (mode==='sign-in' ? 'sign-up' : 'sign-in')">
-              {{ mode === 'sign-in' ? 'Create account' : 'Have an account? Sign in' }}
-            </button>
+            <button class="btn primary" type="submit">Sign In</button>
           </div>
         </form>
 

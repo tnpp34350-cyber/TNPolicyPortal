@@ -1,0 +1,98 @@
+<section class="admin-console">
+  <div class="container">
+    <h1 class="title">Admin Console</h1>
+    <p class="lead">Management tools and settings for administrators.</p>
+    <!-- Hero / KPIs -->
+    <div class="admin-hero">
+      <div class="hero-left">
+        <h2>Admin Console</h2>
+        <p>Manage best practices, sectors, districts and linked policies.</p>
+      </div>
+
+      <div class="hero-kpis">
+        <div class="kpi">
+          <div class="kpi-value">{{ records.length }}</div>
+          <div class="kpi-label">Total Practices</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">{{ sectors.length }}</div>
+          <div class="kpi-label">Sectors</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">{{ districts.length }}</div>
+          <div class="kpi-label">Districts</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value">{{ selectedCount }}</div>
+          <div class="kpi-label">Selected</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="search-wrap">
+          <input class="search" placeholder="Search sectors or districts" (input)="$event.stopPropagation()" />
+        </div>
+
+        <div class="filter-block">
+          <h4>Sector Filters</h4>
+          <div class="filter-pills">
+            <button *ngFor="let s of sectors" class="pill" [class.active]="selectedSectors.has(s)" (click)="toggleSector(s)">
+              {{ s }}
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <h4>District Filters</h4>
+          <div class="filter-pills">
+            <button *ngFor="let d of districts" class="pill" [class.active]="selectedDistricts.has(d)" (click)="toggleDistrict(d)">
+              {{ d }}
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <div class="admin-actions">
+          <div>
+            <button class="btn" (click)="selectAllVisible(true)">Select all</button>
+            <button class="btn" (click)="selectAllVisible(false)">Clear selection</button>
+          </div>
+          <div>
+            <button class="btn primary" (click)="bulkExportSelected()">Export selected</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width:48px"><input type="checkbox" (change)="$event.target.checked ? selectAllVisible(true) : selectAllVisible(false)" /></th>
+                <th>Best Practice</th>
+                <th>Sector</th>
+                <th>District</th>
+                <th>Policies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of filteredRecords">
+                <td><input type="checkbox" [(ngModel)]="r.selected" (change)="toggleSelectRecord(r)" /></td>
+                <td>{{ r.bestpractice }}</td>
+                <td>{{ r.sector }}</td>
+                <td>{{ r.district }}</td>
+                <td>{{ r.policies.join(', ') }}</td>
+              </tr>
+              <tr *ngIf="filteredRecords.length === 0">
+                <td colspan="5" class="no-data">No records match the selected filters.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <div class="admin-note">This admin area shows a sample table and filters — replace with real data/service integration as needed.</div>
+  </div>
+</section>

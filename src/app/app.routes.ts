@@ -3,6 +3,7 @@ import { SectionComponent } from './components/section/section.component';
 import { BestPracticesComponent } from './components/best-practices/best-practices.component';
 import { ExploreSectorComponent } from './components/explore-sector/explore-sector.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { AdminConsoleComponent } from './components/admin-console/admin-console.component';
 import { SectorDetailComponent } from './components/sector-detail/sector-detail.component';
 
 export const routes: Routes = [
@@ -10,5 +11,6 @@ export const routes: Routes = [
 	{ path: 'best-practices', component: BestPracticesComponent },
 	{ path: 'explore', component: ExploreSectorComponent },
 	{ path: 'analytics', component: AnalyticsComponent },
-	{ path: 'dashboard/:sector', component: SectorDetailComponent }
+	{ path: 'dashboard/:sector', component: SectorDetailComponent },
+	{ path: 'admin', component: AdminConsoleComponent }
 ];
