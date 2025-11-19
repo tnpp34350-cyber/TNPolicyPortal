@@ -36,7 +36,7 @@
         </div>
 
         <div class="filter-block">
-          <h4>Sector Filters</h4>
+          <h4>Sector</h4>
           <div class="filter-pills">
             <button *ngFor="let s of sectors" class="pill" [class.active]="selectedSectors.has(s)" (click)="toggleSector(s)">
               {{ s }}
@@ -45,11 +45,24 @@
         </div>
 
         <div class="filter-block">
-          <h4>District Filters</h4>
-          <div class="filter-pills">
-            <button *ngFor="let d of districts" class="pill" [class.active]="selectedDistricts.has(d)" (click)="toggleDistrict(d)">
-              {{ d }}
-            </button>
+          <h4>District</h4>
+          <div class="district-toggle" (click)="toggleDistrictsDropdown()" role="button" tabindex="0">
+            <span class="toggle-label">Select districts</span>
+            <span class="toggle-count">{{ selectedDistricts.size }} / {{ districts.length }}</span>
+            <span class="toggle-caret">▾</span>
+          </div>
+
+          <div class="district-dropdown" *ngIf="districtsOpen" (click)="$event.stopPropagation()">
+            <div class="dropdown-actions" style="display:flex; gap:8px; align-items:center; margin-bottom:8px">
+              <input type="checkbox" id="selectAllDistricts" (change)="selectAllDistricts($event.target.checked)" [checked]="selectedDistricts.size === districts.length" />
+              <label for="selectAllDistricts" style="margin:0; font-size:13px">Select all</label>
+            </div>
+            <div class="filter-list" style="max-height:36vh; overflow:auto; padding-right:6px">
+              <label *ngFor="let d of districts" class="filter-item">
+                <input type="checkbox" (change)="toggleDistrict(d)" [checked]="selectedDistricts.has(d)" />
+                {{ d }}
+              </label>
+            </div>
           </div>
         </div>
       </aside>

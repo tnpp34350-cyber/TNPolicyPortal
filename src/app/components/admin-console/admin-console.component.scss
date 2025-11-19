@@ -14,10 +14,10 @@
 .btn { background:#eef6f8; border:1px solid #dbeff2; padding:6px 10px; border-radius:6px; cursor:pointer }
 .btn.primary { background:#0b728a; color:#fff; border-color:#0b728a }
 
-.table-wrap { background:#fff; padding:8px; border-radius:8px; box-shadow:0 6px 18px rgba(6,40,50,0.04) }
+.table-wrap { background:#fff; padding:10px; border-radius:10px; box-shadow:0 20px 48px rgba(6,40,50,0.06); border: 1px solid rgba(11,114,138,0.12) }
 .admin-table { width:100%; border-collapse:collapse }
-.admin-table th, .admin-table td { text-align:left; padding:10px 12px; border-bottom:1px solid #f0f4f5 }
-.admin-table thead th { background:#fbfeff }
+.admin-table th, .admin-table td { text-align:left; padding:10px 12px; border-bottom:1px solid rgba(11,114,138,0.08) }
+.admin-table thead th { background: linear-gradient(90deg,#eaf9fb,#f3fbfc); font-weight:800; border-bottom:2px solid rgba(11,114,138,0.18); color:#06323a }
 .no-data { text-align:center; padding:18px; color:#667 }
 
 @media (max-width: 900px) {
@@ -39,10 +39,22 @@
 .pill { padding:6px 10px; border-radius:16px; border:1px solid #e6eef0; background:#f6fafa; cursor:pointer; font-size:13px }
 .pill.active { background:#0b728a; color:#fff; border-color:#0b728a; transform:translateY(-2px); box-shadow:0 8px 20px rgba(11,114,138,0.12) }
 
+/* district dropdown */
+.district-toggle { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:8px 10px; background:#fff; border-radius:8px; border:1px solid rgba(11,114,138,0.06); cursor:pointer }
+.district-toggle .toggle-label { font-size:14px }
+.district-toggle .toggle-count { font-size:12px; color:#356368 }
+.district-toggle .toggle-caret { font-size:12px; color:#356368 }
+
+.district-dropdown { position:relative; margin-top:8px; background:#fff; border-radius:8px; padding:10px; border:1px solid rgba(11,114,138,0.08); box-shadow:0 10px 30px rgba(11,114,138,0.06); z-index:40 }
+.district-dropdown .filter-list { display:flex; flex-direction:column; gap:6px }
+.district-dropdown .filter-item { padding:6px 8px; border-radius:6px }
+.district-dropdown .filter-item:hover { background: #f0fbfb }
+
 /* polished table */
-.admin-table tbody tr:nth-child(odd) { background: #fbfeff }
-.admin-table tbody tr:hover { background: #eef8fa; transform: translateX(0); }
-.policy-badge { display:inline-block; background:#eef6f8; color:#0b728a; padding:4px 8px; border-radius:12px; font-size:12px; margin-right:6px }
+.admin-table tbody tr:nth-child(odd) { background: #e6fbfc }
+.admin-table tbody tr:nth-child(even) { background: #ffffff }
+.admin-table tbody tr:hover { background: #cdeff0; transform: translateX(0); box-shadow: 0 12px 32px rgba(11,114,138,0.06); }
+.policy-badge { display:inline-block; background:#0b728a; color:#fff; padding:6px 10px; border-radius:14px; font-size:12px; margin-right:8px; font-weight:700; box-shadow: 0 6px 18px rgba(11,114,138,0.12) }
 .admin-table td:first-child { width:48px }
 .admin-table td:last-child { width:180px }
 

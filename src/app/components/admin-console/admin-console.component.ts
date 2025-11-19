@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ export class AdminConsoleComponent {
   ];
 
   districts = [
-    'Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Tirunelveli', 'Vellore'
+    'Chennai', 'Tiruchirappalli', 'Madurai', 'Tirunelveli', 'Coimbatore', 'Nilgiris', 'Kanyakumari', 'Vellore', 'Chengalpattu', 'Kanchipuram', 'Villupuram', 'Ranipet', 'Tiruppur', 'Karur', 'Erode', 'Sivagangai', 'Ramanathapuram', 'Virudunagar', 'Tenkasi', 'Theni', 'Dindigul', 'Puducherry', 'Kallakurichi', 'Perambalur'
   ];
 
   // Sample best practice records
@@ -49,6 +49,10 @@ export class AdminConsoleComponent {
   // Filter state
   selectedSectors = new Set<string>();
   selectedDistricts = new Set<string>();
+  // dropdown state
+  districtsOpen = false;
+
+  constructor() {}
 
   // Computed list
   get filteredRecords() {
@@ -69,6 +73,27 @@ export class AdminConsoleComponent {
     else this.selectedDistricts.add(d);
   }
 
+  toggleDistrictsDropdown() {
+    this.districtsOpen = !this.districtsOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!this.districtsOpen) return;
+    const insideToggle = !!target.closest('.district-toggle');
+    const insideDropdown = !!target.closest('.district-dropdown');
+    if (!insideToggle && !insideDropdown) this.districtsOpen = false;
+  }
+
+  selectAllDistricts(checked: boolean) {
+    if (checked) {
+      this.districts.forEach(d => this.selectedDistricts.add(d));
+    } else {
+      this.selectedDistricts.clear();
+    }
+  }
+
   toggleSelectRecord(rec: any) {
     rec.selected = !rec.selected;
   }
@@ -87,5 +112,6 @@ export class AdminConsoleComponent {
   get selectedCount() {
     return this.records.filter(r => r.selected).length;
   }
+  
 }
 
