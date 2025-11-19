@@ -87,6 +87,7 @@
                 <th>Sector</th>
                 <th>District</th>
                 <th>Policies</th>
+                <th>Files</th>
               </tr>
             </thead>
             <tbody>
@@ -96,9 +97,15 @@
                 <td>{{ r.sector }}</td>
                 <td>{{ r.district }}</td>
                 <td>{{ r.policies.join(', ') }}</td>
+                <td>
+                  <ng-container *ngIf="r.files?.length; else noFiles">
+                    <span class="file-pill" *ngFor="let f of r.files">{{ f }}</span>
+                  </ng-container>
+                  <ng-template #noFiles>-</ng-template>
+                </td>
               </tr>
               <tr *ngIf="filteredRecords.length === 0">
-                <td colspan="5" class="no-data">No records match the selected filters.</td>
+                <td colspan="6" class="no-data">No records match the selected filters.</td>
               </tr>
             </tbody>
           </table>

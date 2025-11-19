@@ -36,10 +36,11 @@ export class AdminConsoleComponent {
     sector: string;
     district: string;
     policies: string[];
+    files?: string[];
     selected?: boolean;
   }> = [
-    { id: 1, bestpractice: 'Rainwater harvesting model', sector: 'Water & WASH', district: 'Chennai', policies: ['Policy A','Policy C'] },
-    { id: 2, bestpractice: 'Solar microgrid program', sector: 'Energy', district: 'Coimbatore', policies: ['Policy B'] },
+    { id: 1, bestpractice: 'Rainwater harvesting model', sector: 'Water & WASH', district: 'Chennai', policies: ['Policy A','Policy C'], files: ['rainwater-spec.pdf'] },
+    { id: 2, bestpractice: 'Solar microgrid program', sector: 'Energy', district: 'Coimbatore', policies: ['Policy B'], files: ['solar-guidelines.pdf','budget-sheet.xlsx'] },
     { id: 3, bestpractice: 'Community health outreach', sector: 'Health', district: 'Madurai', policies: ['Policy A','Policy D'] },
     { id: 4, bestpractice: 'Skill training hubs', sector: 'Skilling & Livelihoods', district: 'Tiruchirappalli', policies: ['Policy E'] },
     { id: 5, bestpractice: 'Agri extension clinics', sector: 'Agriculture', district: 'Tirunelveli', policies: ['Policy F'] },

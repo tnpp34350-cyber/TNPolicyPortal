@@ -58,6 +58,9 @@
 .admin-table td:first-child { width:48px }
 .admin-table td:last-child { width:auto }
 
+/* file pill styles */
+.file-pill { display:inline-block; background: color-mix(in srgb, var(--surface) 88%, #eef6f8 12%); color:var(--text); padding:6px 8px; border-radius:12px; margin-right:6px; font-size:13px; border:1px solid rgba(0,0,0,0.06) }
+
 .search-wrap { margin-bottom:12px }
 .search { width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6eef0 }
 
