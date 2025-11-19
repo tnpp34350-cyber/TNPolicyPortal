@@ -26,6 +26,8 @@
               class="panel-card" 
               *ngFor="let p of item.panelItems"
               [style.backgroundImage]="'url(' + p.icon + ')'"
+              (click)="onPanelCardClick(p); $event.stopPropagation()"
+              role="button"
             >
               <div class="card-content">
                 <div class="card-header">
@@ -55,5 +57,8 @@
 
       </li>
     </ul>
+  </div>
+  <div class="navbar-right">
+    <button class="login-btn" (click)="openLogin($event)">Login</button>
   </div>
 </nav>

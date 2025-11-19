@@ -1,0 +1,63 @@
+<div class="auth-overlay" *ngIf="show" (click)="close()">
+  <div class="auth-modal" (click)="$event.stopPropagation()">
+    <button class="close" (click)="close()">✕</button>
+
+    <div class="auth-grid">
+      <div class="auth-visual">
+        <div class="visual-inner">
+          <div class="brand">Policy Portal</div>
+          <h2 class="visual-title">Welcome back</h2>
+          <p class="visual-sub">Access dashboards, analytics and curated content. Sign in to continue your work.</p>
+
+          <div class="visual-decor" aria-hidden="true">
+            <!-- subtle SVG pattern -->
+            <svg width="160" height="100" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="160" height="100" rx="12" fill="rgba(255,255,255,0.06)"/>
+              <path d="M10 80 L60 30 L110 80" stroke="rgba(255,255,255,0.12)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-form">
+        <div class="auth-tabs">
+          <button [class.active]="mode==='sign-in'" (click)="mode='sign-in'">Sign In</button>
+          <button [class.active]="mode==='sign-up'" (click)="mode='sign-up'">Sign Up</button>
+        </div>
+
+        <form (ngSubmit)="submit()">
+          <div *ngIf="mode==='sign-up'" class="form-row">
+            <label>Full name</label>
+            <input [(ngModel)]="name" name="name" required />
+          </div>
+
+          <div class="form-row">
+            <label>Email</label>
+            <input [(ngModel)]="email" name="email" type="email" required />
+          </div>
+
+          <div class="form-row">
+            <label>Password</label>
+            <input [(ngModel)]="password" name="password" type="password" required />
+          </div>
+
+          <div class="form-row actions">
+            <button class="btn primary" type="submit">{{ mode === 'sign-in' ? 'Sign In' : 'Create Account' }}</button>
+            <button type="button" class="btn ghost" (click)="mode = (mode==='sign-in' ? 'sign-up' : 'sign-in')">
+              {{ mode === 'sign-in' ? 'Create account' : 'Have an account? Sign in' }}
+            </button>
+          </div>
+        </form>
+
+        <div class="social-row">
+          <div class="social-label">Or continue with</div>
+          <div class="social-buttons">
+            <button (click)="social('google')" class="social google"> <span class="s-icon">G</span> Google</button>
+            <button (click)="social('facebook')" class="social fb"> <span class="s-icon">f</span> Facebook</button>
+            <button (click)="social('twitter')" class="social tw"> <span class="s-icon">t</span> Twitter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

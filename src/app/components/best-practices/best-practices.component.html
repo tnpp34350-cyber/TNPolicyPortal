@@ -1,0 +1,34 @@
+<section class="best-practices-hero">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Best Practices</h1>
+        <p class="hero-sub">Curated initiatives and case studies from across India and the world, to inspire learning, sharing, and adoption.</p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary">
+            <span>Explore All Best Practices</span>
+            <span class="btn-arrow">➜</span>
+          </button>
+          <button class="btn btn-ghost">Contribute Best Practices</button>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat" *ngFor="let s of stats; let i = index" [class.has-sep]="i < stats.length - 1">
+            <div class="stat-value">{{ s.value }}</div>
+            <div class="stat-label">{{ s.label }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <!-- right side can hold hero visuals or be left empty to reveal background -->
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <a class="quick-link" href="#">Go To<br /><strong>Policy</strong></a>
+      <a class="quick-link" href="#">Go To<br /><strong>Data</strong></a>
+    </div>
+  </div>
+</section>

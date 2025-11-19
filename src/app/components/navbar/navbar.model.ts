@@ -127,5 +127,5 @@ export const NAVBAR_ITEMS: NavItem[] = [
     ]
   },
   { label: 'Programmes', hasDropdown: true },
-  { label: 'NITI Resources' }
+  { label: 'Analytics' }
 ];

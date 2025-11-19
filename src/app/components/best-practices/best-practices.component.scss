@@ -1,0 +1,175 @@
+.best-practices-hero {
+  /* Ensure hero content is visible even if the image is missing
+     and avoid being hidden under a fixed navbar. */
+  padding: 48px 28px;
+  padding-top: 120px; /* leave space for the fixed header */
+  min-height: calc(100vh - 100px);
+
+  /* Gradient fallback and primary hero image (Unsplash hotlink) */
+  background: linear-gradient(90deg, rgba(6,40,50,0.6) 0%, rgba(12,50,65,0.2) 100%),
+              url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=2000&q=80');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+
+  position: relative;
+}
+
+/* dark overlay for better contrast over background image */
+.best-practices-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* slightly stronger vignette + mild left-to-right gradient */
+  background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* above overlay */
+}
+
+.hero-side {
+  min-height: 260px;
+}
+
+.hero-title {
+  font-size: 64px;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.hero-sub {
+  font-size: 18px;
+  margin: 0 0 22px 0;
+  color: rgba(255,255,255,0.92);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+  align-items: center;
+}
+
+.btn { 
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+
+.btn-primary {
+  background: #fff;
+  color: #0b5f8a;
+  padding-left: 20px;
+  padding-right: 14px;
+  border: 2px solid rgba(11,95,138,0.12);
+  box-shadow: 0 6px 26px rgba(8,45,60,0.28);
+  border-radius: 40px;
+}
+
+.btn-primary .btn-arrow {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(180deg,#0b5f8a,#0a7aa0);
+  color: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.96);
+  padding: 12px 20px;
+  border-radius: 28px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 36px;
+  margin-top: 36px;
+  align-items: center;
+}
+
+.stat {
+  text-align: left;
+  color: rgba(255,255,255,0.95);
+  padding: 0 28px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.stat.has-sep {
+  border-right: 1px solid rgba(255,255,255,0.16);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Quick links on the right side */
+.quick-links {
+  position: absolute;
+  right: 24px;
+  top: 42%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 3;
+}
+
+.quick-link {
+  display: inline-block;
+  background: linear-gradient(180deg,#0b72a3,#045a86);
+  color: white;
+  padding: 18px 22px;
+  width: 160px;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  text-align: left;
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-links { display: none; }
+  .hero-title { font-size: 48px; }
+  .stat-value { font-size: 28px; }
+}

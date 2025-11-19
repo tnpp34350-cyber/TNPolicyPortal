@@ -1,3 +1,5 @@
+// Load CoreUI stylesheet globally during app bootstrap
+import '@coreui/coreui/dist/css/coreui.min.css';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';

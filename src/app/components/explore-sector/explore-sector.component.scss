@@ -2,6 +2,7 @@
   padding: 60px 20px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
   min-height: 100vh;
+  /* Match navbar font stack for consistency across the site */
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -18,10 +19,11 @@
 
 .title {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 700;
   color: #001d3d;
   margin: 0 0 12px 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
+  letter-spacing: -0.2px;
 }
 
 .subtitle {
@@ -29,6 +31,7 @@
   color: #666;
   margin: 0;
   font-weight: 500;
+  font-family: inherit;
 }
 
 /* Dropdowns Container */
@@ -164,9 +167,11 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    /* subtle glossy sheen */
+    background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 18%, transparent 48%);
     z-index: 1;
     pointer-events: none;
+    mix-blend-mode: overlay;
   }
 
   &:hover {
@@ -180,19 +185,23 @@
 }
 
 .discover-card {
-  background: linear-gradient(135deg, #2c3e7f 0%, #3d4d8f 100%);
+  /* Soft teal-blue with gentle gloss */
+  background: linear-gradient(135deg, #2b6571 0%, #69a6b3 100%);
 }
 
 .browse-card {
-  background: linear-gradient(135deg, #2c5aa0 0%, #3d6ab0 100%);
+  /* Soft indigo */
+  background: linear-gradient(135deg, #3b5b9a 0%, #88a0d6 100%);
 }
 
 .explore-card {
-  background: linear-gradient(135deg, #3d5a9f 0%, #4d6aaf 100%);
+  /* Warm muted amber */
+  background: linear-gradient(135deg, #b87a32 0%, #f0c08a 100%);
 }
 
 .find-card {
-  background: linear-gradient(135deg, #4d5a8f 0%, #5d6a9f 100%);
+  /* Soft muted green */
+  background: linear-gradient(135deg, #2c8971 0%, #88c6b0 100%);
 }
 
 .card-header {
@@ -219,14 +228,15 @@
 
 .card-number {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1;
 }
 
 .card-title {
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  font-family: inherit;
 }
 
 .card-button {
@@ -369,11 +379,12 @@
 
 .section-heading {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   color: #001d3d;
   margin: 0 0 40px 0;
   text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
+  letter-spacing: -0.15px;
 }
 
 @media (max-width: 768px) {

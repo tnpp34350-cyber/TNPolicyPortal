@@ -1,0 +1,42 @@
+<section class="analytics-page">
+  <div class="container">
+    <h1 class="page-title">Analytics</h1>
+    <p class="page-sub">Explore sector analytics and visual summaries.</p>
+
+    <div class="dashboard-wrapper">
+      <!-- Embedded CoreUI demo dashboard (external) -->
+      <iframe class="dashboard-iframe" src="https://coreui.io/demos/angular/5.5/free/#/dashboard" title="CoreUI Demo Dashboard" frameborder="0" loading="lazy"></iframe>
+      <div class="dashboard-note">
+        <p>Preview from CoreUI demo. For a native integration, install CoreUI for Angular packages (see instructions below).</p>
+        <a class="open-full" href="https://coreui.io/demos/angular/5.5/free/#/dashboard" target="_blank" rel="noopener">Open full demo</a>
+      </div>
+    </div>
+    <!-- Small CoreUI-style widgets (uses CoreUI CSS) -->
+    <div class="coreui-widgets" style="margin:20px 0; display:flex; gap:16px; flex-wrap:wrap;">
+      <div class="card" style="flex:1 1 240px;">
+        <div class="card-body">
+          <h5 class="card-title">Active Dashboards</h5>
+          <p class="card-text">12 active dashboards across sectors.</p>
+          <a href="/analytics" class="btn btn-primary">Open Analytics</a>
+        </div>
+      </div>
+      <div class="card" style="flex:1 1 240px;">
+        <div class="card-body">
+          <h5 class="card-title">Recent Views</h5>
+          <p class="card-text">Sector analytics viewed in last 7 days.</p>
+          <a href="/analytics" class="btn btn-outline-primary">View Reports</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sectors-grid">
+      <div class="sector-card" *ngFor="let s of sectors; let i = index">
+        <div class="sector-card-inner">
+          <div class="sector-icon">{{ i + 1 }}</div>
+          <div class="sector-title">{{ s }}</div>
+          <div class="sector-desc">View analytics and dashboards for {{ s }}.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
