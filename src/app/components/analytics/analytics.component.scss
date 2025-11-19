@@ -1,8 +1,62 @@
-.analytics-page {
+.dashboard-page {
   padding: 40px 20px;
   min-height: 70vh;
   background: #f7fafc;
 }
+
+/* Scrollable sector panels */
+.sectors-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 18px 6px;
+  margin: 18px 0 28px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sector-panel {
+  min-width: 320px;
+  height: 220px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+  flex: 0 0 auto;
+  overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.sector-panel:hover { transform: translateY(-6px); box-shadow: 0 18px 46px rgba(2,6,23,0.2); }
+
+.sector-panel.selected {
+  outline: 3px solid rgba(11,114,138,0.18);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 26px 64px rgba(2,6,23,0.28);
+}
+
+.panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.45) 100%);
+  display:flex;
+  align-items:flex-end;
+  padding: 16px;
+}
+
+.panel-content { color: #fff; }
+.panel-title { margin:0; font-size:20px; font-weight:800; letter-spacing: -0.3px }
+.panel-desc { margin:6px 0 10px 0; font-size:13px; opacity:0.94 }
+.btn.view { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.18); padding:8px 12px; border-radius:8px }
+
+/* Make the scroll look nice on desktop */
+.sectors-scroll::-webkit-scrollbar { height: 10px; }
+.sectors-scroll::-webkit-scrollbar-thumb { background: rgba(10,90,110,0.25); border-radius: 10px; }
+
+@media (max-width: 900px) {
+  .sector-panel { min-width: 260px; height: 200px; }
+}
+
 
 .container {
   max-width: 1200px;

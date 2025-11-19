@@ -1,0 +1,23 @@
+<section class="sector-detail">
+  <div class="container">
+    <a class="back-link" routerLink="/analytics">← Back to Dashboard</a>
+    <div *ngIf="sector; else notFound" class="detail-card">
+      <div class="hero" [style.backgroundImage]="'url(' + sector.img + ')'">
+        <div class="hero-overlay">
+          <h1>{{ sector.title }}</h1>
+        </div>
+      </div>
+      <div class="detail-body">
+        <p class="desc">{{ sector.desc }}</p>
+        <p>This is a placeholder detail view. Replace with charts and panels for the {{ sector.title }} sector.</p>
+      </div>
+    </div>
+
+    <ng-template #notFound>
+      <div class="not-found">
+        <h3>Sector not found</h3>
+        <p>We couldn't find the sector you're looking for.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

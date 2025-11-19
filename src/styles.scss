@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Ensure app-root fills the viewport */
+app-root, .app-container { min-height: 100vh; }
+
+:root { --navbar-height: 72px; }
+
+/* Make room for fixed navbar */
+.app-container { padding-top: var(--navbar-height); }

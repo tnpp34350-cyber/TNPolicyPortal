@@ -29,7 +29,7 @@ export class NavbarComponent {
       return;
     }
 
-    if (label === 'Analytics') {
+    if (label === 'Dashboard') {
       this.router.navigateByUrl('/analytics');
       this.hoveredDropdown = null;
       return;
