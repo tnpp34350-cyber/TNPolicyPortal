@@ -6,6 +6,15 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Apply saved theme early to avoid flicker
+    (function(){
+      try {
+        const t = localStorage.getItem('tn-theme');
+        if (t === 'dark') document.documentElement.classList.add('theme-dark');
+      } catch(e) { /* ignore */ }
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>

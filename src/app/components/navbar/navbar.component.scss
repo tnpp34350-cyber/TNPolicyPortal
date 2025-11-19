@@ -3,8 +3,8 @@
   max-width: none;
   margin: 0;
   box-sizing: border-box;
-  background: linear-gradient(90deg, #1a7b7e 0%, #1a8b8f 100%);
-  color: white;
+  background: linear-gradient(90deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 80%, var(--accent) 20%) 100%);
+  color: var(--text);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,18 +44,18 @@
   flex-shrink: 0;
 }
 
-.govt-title {
+  .govt-title {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: white;
+  color: var(--text);
   line-height: 1.2;
 }
 
 .portal-title {
   font-size: 14px;
   font-weight: 600;
-  color: #ffa500;
+  color: var(--accent);
   letter-spacing: 0.3px;
   line-height: 1.2;
 }
@@ -100,9 +100,9 @@
   }
 
   li:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.05);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px var(--card-shadow);
 
     .arrow {
       transform: rotate(180deg);
@@ -110,8 +110,8 @@
   }
 
   li.active {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 4px 12px var(--card-shadow);
 
     .arrow {
       transform: rotate(180deg);
@@ -236,17 +236,17 @@
   top: calc(100% + 12px);
   left:  50%;
   transform: translateX(-20%);
-  background: linear-gradient(135deg, #ffffff 0%, #f5f8ff 100%);
-  color: #001d3d;
+  background: var(--surface);
+  color: var(--text);
   padding: 20px;
   border-radius: 16px;
   width: auto;
   max-width: 90vw;
   min-width: 1150px;
-  box-shadow: 0 10px 40px rgba(26, 123, 126, 0.2), 0 0 0 1px rgba(255, 165, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
   display: block;
   z-index: 1000;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(6px);
   animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
   overflow-x: hidden;
@@ -281,13 +281,13 @@
 }
 
 .panel-card {
-  background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 90%, #ffffff 10%) 0%, var(--surface) 100%);
   border-radius: 14px;
   padding: 15px;
   height: 180px;
   position: relative;
-  border: 1.5px solid rgba(255, 165, 0, 0.1);
-  box-shadow: 0 4px 15px rgba(26, 123, 126, 0.08);
+  border: 1px solid rgba(255,165,0,0.06);
+  box-shadow: 0 4px 15px var(--card-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   display: flex;
@@ -298,7 +298,6 @@
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-  background-color: #fff;
 }
 
 .panel-card::before {
@@ -308,7 +307,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(135deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
   z-index: 1;
   border-radius: 14px;
 }

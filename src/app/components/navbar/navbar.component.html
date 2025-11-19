@@ -59,6 +59,7 @@
     </ul>
   </div>
   <div class="navbar-right">
+    <button class="icon-btn" title="Toggle theme" (click)="toggleTheme()">{{ isDark ? '☀️' : '🌙' }}</button>
     <button class="login-btn" (click)="openLogin($event)">Admin</button>
   </div>
 </nav>

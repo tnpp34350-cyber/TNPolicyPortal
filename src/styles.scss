@@ -12,3 +12,34 @@ app-root, .app-container { min-height: 100vh; }
 
 /* Make room for fixed navbar */
 .app-container { padding-top: var(--navbar-height); }
+
+/* Theme variables */
+:root {
+	--bg: #ffffff;
+	--surface: #ffffff;
+	--text: #062c33;
+	--muted: #556b6b;
+	--primary: #0b728a;
+	--accent: #ffa500;
+	--card-shadow: rgba(6,40,50,0.06);
+}
+
+.theme-dark {
+	--bg: #0b1720;
+	--surface: #071219;
+	--text: #e6f6f8;
+	--muted: #99b2b6;
+	--primary: #2bb6c6;
+	--accent: #ffb74d;
+	--card-shadow: rgba(0,0,0,0.6);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+}
+
+/* Light default for app containers */
+.app-container, app-root {
+	background: transparent;
+}

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavItem, DropdownCard, NAVBAR_ITEMS } from './navbar.model';
 import { Router } from '@angular/router';
@@ -11,7 +11,31 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+
+  isDark = false;
+
+  ngOnInit(): void {
+    try {
+      this.isDark = localStorage.getItem('tn-theme') === 'dark';
+      if (this.isDark) document.documentElement.classList.add('theme-dark');
+    } catch (e) {
+      this.isDark = false;
+    }
+  }
+
+  toggleTheme() {
+    this.isDark = !this.isDark;
+    try {
+      if (this.isDark) {
+        document.documentElement.classList.add('theme-dark');
+        localStorage.setItem('tn-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('theme-dark');
+        localStorage.setItem('tn-theme', 'light');
+      }
+    } catch(e) { /* ignore storage errors */ }
+  }
 
   hoveredDropdown: string | null = null;
   navItems: NavItem[] = NAVBAR_ITEMS;
