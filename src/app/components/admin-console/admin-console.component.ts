@@ -112,6 +112,7 @@ export class AdminConsoleComponent {
   get selectedCount() {
     return this.records.filter(r => r.selected).length;
   }
+
   
 }
 
