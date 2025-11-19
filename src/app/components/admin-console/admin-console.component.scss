@@ -56,7 +56,7 @@
 .admin-table tbody tr:hover { background: #cdeff0; transform: translateX(0); box-shadow: 0 12px 32px rgba(11,114,138,0.06); }
 .policy-badge { display:inline-block; background:#0b728a; color:#fff; padding:6px 10px; border-radius:14px; font-size:12px; margin-right:8px; font-weight:700; box-shadow: 0 6px 18px rgba(11,114,138,0.12) }
 .admin-table td:first-child { width:48px }
-.admin-table td:last-child { width:180px }
+.admin-table td:last-child { width:auto }
 
 .search-wrap { margin-bottom:12px }
 .search { width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6eef0 }

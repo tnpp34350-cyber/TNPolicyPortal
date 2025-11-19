@@ -52,6 +52,8 @@ export class AdminConsoleComponent {
   // dropdown state
   districtsOpen = false;
 
+  // no inline edit state (reverted)
+
   constructor() {}
 
   // Computed list
@@ -112,7 +114,7 @@ export class AdminConsoleComponent {
   get selectedCount() {
     return this.records.filter(r => r.selected).length;
   }
-
+  // inline edit feature removed per revert request
   
 }
 
