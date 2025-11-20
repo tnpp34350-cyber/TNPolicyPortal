@@ -1,0 +1,94 @@
+<div class="admin-analytics-container">
+  <div class="analytics-wrapper">
+    <!-- Main Content - Infographics and Charts -->
+    <main class="analytics-main">
+      <div class="infographics-header">
+        <p class="subtitle" *ngIf="selectedSector">Selected: <strong>{{ selectedSector }}</strong></p>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-section">
+        <!-- Visitors Line Chart -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>{{ chartOptions.plugins?.title?.text || 'Visitors Trend' }}</h3>
+            <div class="chart-legend">
+              <span class="legend-item"><i style="background-color: #3498db;"></i> 2023</span>
+              <span class="legend-item"><i style="background-color: #f39c12;"></i> 2024</span>
+            </div>
+          </div>
+          <p-chart type="line" [data]="visitorsChart" [options]="chartOptions"></p-chart>
+        </div>
+
+        <!-- Device Category Doughnut -->
+        <div class="chart-card compact">
+          <div class="chart-header">
+            <h3>Visit by Device Category</h3>
+          </div>
+          <p-chart type="doughnut" [data]="deviceCategoryChart" [options]="{ responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }"></p-chart>
+        </div>
+
+        <!-- Mobile Devices Pie -->
+        <div class="chart-card compact">
+          <div class="chart-header">
+            <h3>Visitor's Mobile Devices</h3>
+          </div>
+          <p-chart type="pie" [data]="mobileDevicesChart" [options]="{ responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }"></p-chart>
+        </div>
+      </div>
+
+      <!-- Tables Section -->
+      <div class="tables-section">
+        <!-- Most Popular Pages -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Most Popular Pages</h3>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Visitors</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let page of popularPagesData">
+                <td class="page-name">{{ page.page }}</td>
+                <td class="visitor-count">{{ page.visitors }}</td>
+                <td class="percentage">{{ page.percent }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- User Retention -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>User Retention Rate</h3>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Retention</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userRetentionData">
+                <td class="period-name">{{ item.period }}</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" [style.width]="item.retention + '%'"></div>
+                  </div>
+                </td>
+                <td class="percentage">{{ item.percent }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,12 +1,35 @@
 <section class="programmes-page">
   <div class="programmes-wrapper">
     <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle" (click)="toggleSidebar()" [class.collapsed]="sidebarCollapsed" title="Toggle sidebar">
+    <!-- <button class="sidebar-toggle" (click)="toggleSidebar()" [class.collapsed]="sidebarCollapsed" title="Toggle sidebar">
       <i class="pi" [ngClass]="sidebarCollapsed ? 'pi-chevron-right' : 'pi-chevron-left'"></i>
-    </button>
+    </button> -->
 
     <!-- Sidebar -->
-    <aside class="programmes-sidebar" [class.collapsed]="sidebarCollapsed">
+    <!-- Analytics Sidebar -->
+    <aside class="programmes-sidebar analytics-sidebar" [class.collapsed]="sidebarCollapsed" *ngIf="activeTab === 3">
+      <div class="sidebar-header">
+        <h3>Sectors</h3>
+      </div>
+      <div class="sectors-list">
+        <button 
+          *ngFor="let sector of adminAnalyticsSectors"
+          class="sector-item"
+          [class.active]="selectedAnalyticsSector === sector.name"
+          (click)="onAnalyticsSectorSelect(sector.name)"
+          [style.border-left]="'4px solid ' + sector.color"
+        >
+          <i class="pi" [ngClass]="sector.icon" [style.color]="sector.color"></i>
+          <div class="sector-info">
+            <span class="sector-name">{{ sector.name }}</span>
+            <span class="sector-count">{{ sector.count }} practices</span>
+          </div>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Default Filters Sidebar -->
+    <aside class="programmes-sidebar" [class.collapsed]="sidebarCollapsed" *ngIf="activeTab !== 3">
       <div class="sidebar-header">
         <h3>Filters</h3>
         <button class="clear-btn" (click)="clearAllFilters()">Clear All</button>
@@ -103,7 +126,7 @@
         <!-- Tab Navigation -->
         <div class="tab-navigation">
       <button 
-        *ngFor="let tab of ['Best Practices', 'Policies', 'Data']; let i = index"
+        *ngFor="let tab of ['Best Practices', 'Policies', 'Data', 'Analytics']; let i = index"
         [class.active]="activeTab === i"
         class="tab-button"
         (click)="activeTab = i"
@@ -128,10 +151,30 @@
                 (input)="searchPractices(searchQuery)"
               >
             </div>
+            <button class="upload-btn" title="Upload file">
+              <i class="pi pi-upload"></i>
+              <span>Upload</span>
+            </button>
+            <button class="edit-btn" title="Edit practice">
+              <i class="pi pi-pencil"></i>
+              <span>Edit</span>
+            </button>
+            <button class="delete-btn" title="Delete practice" >
+              <i class="pi pi-trash"></i>
+              <span>Delete</span>
+            </button>
           </div>
 
           <div class="practices-grid">
             <div *ngFor="let practice of filteredPractices" class="practice-card">
+              <div class="practice-card-checkbox">
+                <p-checkbox 
+                  [binary]="true"
+                  [ngModel]="isPracticeSelected(practice)"
+                  (ngModelChange)="togglePracticeSelection(practice, $event)"
+                  class="card-checkbox"
+                ></p-checkbox>
+              </div>
               <div class="practice-card-image">
                 <img [src]="getPracticeImage(practice.bestpractice)" [alt]="practice.bestpractice" onerror="this.src='https://via.placeholder.com/400x300?text=Practice'">
                 <div class="practice-overlay">
@@ -166,25 +209,60 @@
 
       <!-- Policies Tab -->
       <div class="tab-pane" *ngIf="activeTab === 1" [@slideIn]>
-        <div class="tab-panel-card">
+        <div class="best-practices-container">
+          <div class="practices-header">
+            <div class="search-container">
+              <i class="pi pi-search"></i>
+              <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search policies..." 
+              >
+            </div>
+            <button class="upload-btn" title="Upload file">
+              <i class="pi pi-upload"></i>
+              <span>Upload</span>
+            </button>
+            <button class="edit-btn" title="Edit policy" >
+              <i class="pi pi-pencil"></i>
+              <span>Edit</span>
+            </button>
+            <button class="delete-btn" title="Delete policy">
+              <i class="pi pi-trash"></i>
+              <span>Delete</span>
+            </button>
+          </div>
 
-          
           <div class="tab-content">
             <p class="tab-description">Linked policies and regulatory frameworks</p>
             
-            <div class="details-section">
-              <ul class="policy-list" *ngIf="policies.length > 0">
-                <li *ngFor="let policy of policies" class="policy-item">
-                  <div class="policy-info">
-                    <span class="policy-name">{{ policy.policy }}</span>
-                    <span class="policy-count">{{ policy.count }} practices</span>
+            <div class="policies-grid">
+              <div *ngFor="let policy of policies" class="policy-card" [class.selected]="isPolicySelected(policy.policy)">
+                <div class="policy-card-checkbox">
+                  <p-checkbox 
+                    [binary]="true"
+                    [ngModel]="isPolicySelected(policy.policy)"
+                    (ngModelChange)="togglePolicySelection(policy.policy, $event)"
+                    class="card-checkbox"
+                  ></p-checkbox>
+                </div>
+                <div class="policy-card-image">
+                  <img [src]="getPolicyImage(policy.policy)" [alt]="policy.policy" onerror="this.src='https://via.placeholder.com/400x300?text=Policy'">
+                  <div class="policy-overlay">
+                    <span class="policy-badge">{{ getPolicyType(policy.policy) }}</span>
                   </div>
-                  <div class="policy-indicator">{{ policy.count }}</div>
-                </li>
-              </ul>
-              <div *ngIf="policies.length === 0" class="no-data">
-                <p>📭 No policies available</p>
+                </div>
+                <div class="policy-card-content">
+                  <h3>{{ policy.policy }}</h3>
+                  <div class="policy-meta">
+                    <span class="meta-label">{{ policy.count }} practices</span>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <div *ngIf="policies.length === 0" class="no-data">
+              <p>📭 No policies available</p>
             </div>
           </div>
         </div>
@@ -192,42 +270,102 @@
 
       <!-- Data & Statistics Tab -->
       <div class="tab-pane" *ngIf="activeTab === 2" [@slideIn]>
-        <div class="tab-panel-card">
-          
-          <div class="tab-content">
-            <p class="tab-description">Key statistics and data insights</p>
-            
-            <div class="details-section">
-              <div class="stats-grid">
-                <div class="stat-card stats-practices">
-                  <div class="stat-icon">📚</div>
-                  <div class="stat-value">{{ dataStats.totalPractices }}</div>
-                  <div class="stat-label">Total Practices</div>
+        <div class="best-practices-container">
+          <div class="practices-header">
+            <div class="search-container">
+              <i class="pi pi-search"></i>
+              <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search Data Catalogue by sector and content" 
+                [(ngModel)]="dataSearchQuery"
+                (input)="searchDataCatalog(dataSearchQuery)"
+              >
+            </div>
+            <button class="upload-btn" title="Upload file">
+              <i class="pi pi-upload"></i>
+              <span>Upload</span>
+            </button>
+            <button class="edit-btn" title="Edit data"  >
+              <i class="pi pi-pencil"></i>
+              <span>Edit</span>
+            </button>
+            <button class="delete-btn" title="Delete data">
+              <i class="pi pi-trash"></i>
+              <span>Delete</span>
+            </button>
+          </div>
+
+          <div class="data-results-info">
+            <p>Showing 1 to {{ filteredDataCatalog.length }} out of {{ dataCatalog.length }} results found</p>
+          </div>
+
+          <div class="data-catalog-list">
+            <div *ngFor="let item of filteredDataCatalog" class="data-item" [class.selected]="isDataSelected(item.id)">
+
+
+              <div class="data-item-header">
+                <div class="header-content">
+                  <p-checkbox 
+                    [binary]="true"
+                    [ngModel]="isDataSelected(item.id)"
+                    (ngModelChange)="toggleDataSelection(item.id, $event)"
+                    class="card-checkbox"
+                  ></p-checkbox>
+                  <h3>{{ item.title }}</h3>
                 </div>
-                <div class="stat-card stats-sectors">
-                  <div class="stat-icon">🏢</div>
-                  <div class="stat-value">{{ dataStats.totalSectors }}</div>
-                  <div class="stat-label">Sectors Covered</div>
+              </div>
+
+              <div class="data-tags">
+                <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+              </div>
+
+              <div class="data-description">
+                <p>{{ item.description }}</p>
+              </div>
+
+              <div class="data-metadata">
+                <div class="metadata-row">
+                  <span class="metadata-label">Data Owner</span>
+                  <span class="metadata-value">{{ item.owner }}</span>
                 </div>
-                <div class="stat-card stats-districts">
-                  <div class="stat-icon">📍</div>
-                  <div class="stat-value">{{ dataStats.totalDistricts }}</div>
-                  <div class="stat-label">Districts</div>
+              </div>
+
+              <div class="data-item-footer">
+                <div class="data-info">
+                  <span class="info-badge" *ngIf="item.dataType">
+                    <i class="pi pi-database"></i> {{ item.dataType }}
+                  </span>
+                  <span class="info-badge" *ngIf="item.frequency">
+                    <i class="pi pi-calendar"></i> {{ item.frequency }}
+                  </span>
+                  <span class="info-badge" *ngIf="item.granularity">
+                    <i class="pi pi-map"></i> {{ item.granularity }}
+                  </span>
                 </div>
-                <div class="stat-card stats-policies">
-                  <div class="stat-icon">⚖️</div>
-                  <div class="stat-value">{{ dataStats.totalPolicies }}</div>
-                  <div class="stat-label">Policies</div>
-                </div>
-                <div class="stat-card stats-files">
-                  <div class="stat-icon">📁</div>
-                  <div class="stat-value">{{ dataStats.totalFiles }}</div>
-                  <div class="stat-label">Files</div>
+                <div class="data-actions">
+                  <button class="btn-source">
+                    <i class="pi pi-external-link"></i>
+                    Go to Source
+                  </button>
+                  <button class="btn-explore">
+                    <i class="pi pi-arrow-right"></i>
+                    Explore More
+                  </button>
                 </div>
               </div>
             </div>
+
+            <div *ngIf="filteredDataCatalog.length === 0" class="no-data">
+              <p>📭 No data resources found matching your search</p>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- Analytics Tab -->
+      <div class="tab-pane" *ngIf="activeTab === 3" [@slideIn]>
+        <app-admin-analytics [selectedSectorFromParent]="selectedAnalyticsSector"></app-admin-analytics>
       </div>
     </div>
       </div>
