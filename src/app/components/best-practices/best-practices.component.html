@@ -32,3 +32,41 @@
     </div>
   </div>
 </section>
+
+<!-- Featured Best Practices across Sectors -->
+<section class="featured-practices">
+  <div class="featured-container">
+    <h2 class="featured-title">Featured Best Practices across Sectors</h2>
+    <p class="featured-subtitle">Access a diverse range of Best Practices across Sectors, to learn, adopt and contextualise initiatives.</p>
+
+    <div class="sectors-grid">
+      <!-- All Sectors Button -->
+      <button class="sector-card all-sectors">
+        <div class="sector-card-content">
+          <span class="sector-label">All<br><strong>Sectors</strong></span>
+        </div>
+      </button>
+
+      <!-- Sector Cards with background images -->
+      <div class="sector-card" *ngFor="let sector of sectors" [style.background-image]="'url(' + sector.image + ')'">
+        <div class="sector-overlay"></div>
+        <div class="sector-info">
+          <h3 class="sector-name">{{ sector.name }}</h3>
+          <span class="sector-count">{{ sector.count }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Cases Grid -->
+
+    <!-- View More Button -->
+    <div class="view-more-section">
+      <button class="view-more-btn" (click)="toggleViewMore()">
+        <span>{{ showAllCases ? 'View Less' : 'View More Cases' }}</span>
+        <i class="pi" [ngClass]="showAllCases ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+      </button>
+    </div>
+
+  </div>
+</section>
+
