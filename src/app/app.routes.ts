@@ -12,7 +12,6 @@ export const routes: Routes = [
 	{ path: 'best-practices', component: BestPracticesComponent },
 	{ path: 'explore', component: ExploreSectorComponent },
 	{ path: 'analytics', component: AnalyticsComponent },
-	{ path: 'programmes', component: ProgrammesComponent },
 	{ path: 'dashboard/:sector', component: SectorDetailComponent },
-	{ path: 'admin', component: AdminConsoleComponent }
+	{ path: 'admin', component: ProgrammesComponent }
 ];

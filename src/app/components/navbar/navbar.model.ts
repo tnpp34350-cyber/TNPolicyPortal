@@ -126,6 +126,6 @@ export const NAVBAR_ITEMS: NavItem[] = [
       "Perambalur"
     ]
   },
-  { label: 'Programmes', hasDropdown: true },
+  // { label: 'Programmes', hasDropdown: true },
   { label: 'Dashboard' }
 ];

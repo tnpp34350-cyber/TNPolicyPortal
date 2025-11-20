@@ -65,12 +65,6 @@ export class NavbarComponent implements OnInit {
       return;
     }
 
-    if (label === 'Programmes') {
-      this.router.navigateByUrl('/programmes');
-      this.hoveredDropdown = null;
-      return;
-    }
-
     this.hoveredDropdown =
       this.hoveredDropdown === label ? null : label;
   }
