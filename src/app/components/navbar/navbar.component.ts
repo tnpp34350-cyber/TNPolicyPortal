@@ -53,8 +53,20 @@ export class NavbarComponent implements OnInit {
       return;
     }
 
+    if (label === 'Console') {
+      this.router.navigateByUrl('/admin');
+      this.hoveredDropdown = null;
+      return;
+    }
+
     if (label === 'Dashboard') {
       this.router.navigateByUrl('/analytics');
+      this.hoveredDropdown = null;
+      return;
+    }
+
+    if (label === 'Programmes') {
+      this.router.navigateByUrl('/programmes');
       this.hoveredDropdown = null;
       return;
     }

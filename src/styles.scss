@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+
 html, body {
 	height: 100%;
 	margin: 0;
@@ -15,23 +17,23 @@ app-root, .app-container { min-height: 100vh; }
 
 /* Theme variables */
 :root {
-	--bg: #ffffff;
+	--bg: #f8fafc;
 	--surface: #ffffff;
-	--text: #062c33;
-	--muted: #556b6b;
-	--primary: #0b728a;
-	--accent: #ffa500;
-	--card-shadow: rgba(6,40,50,0.06);
+	--text: #1e293b;
+	--muted: #64748b;
+	--primary: #3b82f6;
+	--accent: #ec4899;
+	--card-shadow: rgba(59, 130, 246, 0.1);
 }
 
 .theme-dark {
-	--bg: #0b1720;
-	--surface: #071219;
-	--text: #e6f6f8;
-	--muted: #99b2b6;
-	--primary: #2bb6c6;
-	--accent: #ffb74d;
-	--card-shadow: rgba(0,0,0,0.6);
+	--bg: #0f172a;
+	--surface: #1e293b;
+	--text: #f1f5f9;
+	--muted: #cbd5e1;
+	--primary: #60a5fa;
+	--accent: #f472b6;
+	--card-shadow: rgba(96, 165, 250, 0.2);
 }
 
 body {

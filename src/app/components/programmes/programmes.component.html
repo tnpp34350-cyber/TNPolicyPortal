@@ -1,0 +1,236 @@
+<section class="programmes-page">
+  <div class="programmes-wrapper">
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" (click)="toggleSidebar()" [class.collapsed]="sidebarCollapsed" title="Toggle sidebar">
+      <i class="pi" [ngClass]="sidebarCollapsed ? 'pi-chevron-right' : 'pi-chevron-left'"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside class="programmes-sidebar" [class.collapsed]="sidebarCollapsed">
+      <div class="sidebar-header">
+        <h3>Filters</h3>
+        <button class="clear-btn" (click)="clearAllFilters()">Clear All</button>
+      </div>
+
+      <!-- Level of Implementation Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('implementation')">
+          <span>Level of Implementation</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['implementation'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+        <div class="filter-content" *ngIf="expandedFilters['implementation']">
+          <div class="filter-search">
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+          <div class="filter-options">
+            <label *ngFor="let option of implementationOptions" class="filter-option">
+              <input type="checkbox" [checked]="option.selected" (change)="toggleOption(option)">
+              <span>{{ option.label }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- States / Districts Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('districts')">
+          <span>States / Districts</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['districts'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+        <div class="filter-content" *ngIf="expandedFilters['districts']">
+          <div class="filter-search">
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+          <div class="filter-options">
+            <label *ngFor="let option of districtOptions" class="filter-option">
+              <input type="checkbox" [checked]="option.selected" (change)="toggleOption(option)">
+              <span>{{ option.label }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sectors / Sub Sectors Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('sectors')">
+          <span>Sectors / Sub Sectors</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['sectors'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+        <div class="filter-content" *ngIf="expandedFilters['sectors']">
+          <div class="filter-search">
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+          <div class="filter-options">
+            <label *ngFor="let option of sectorOptions" class="filter-option">
+              <input type="checkbox" [checked]="option.selected" (change)="toggleOption(option)">
+              <span>{{ option.label }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-cutting Themes Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('themes')">
+          <span>Cross-cutting Themes</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['themes'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+      </div>
+
+      <!-- Content Type Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('contentType')">
+          <span>Content Type</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['contentType'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+      </div>
+
+      <!-- Case Study Type Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title" (click)="toggleFilter('caseStudy')">
+          <span>Case Study Type</span>
+          <i class="pi pi-fw" [ngClass]="expandedFilters['caseStudy'] ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+        </h4>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="programmes-main">
+      <div class="container">
+        <div class="page-header">
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+      <button 
+        *ngFor="let tab of ['Best Practices', 'Policies', 'Data']; let i = index"
+        [class.active]="activeTab === i"
+        class="tab-button"
+        (click)="activeTab = i"
+      >
+        <span>{{ tab }}</span>
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content-wrapper">
+      <!-- Best Practices Tab -->
+      <div class="tab-pane" *ngIf="activeTab === 0" [@slideIn]>
+        <div class="best-practices-container">
+          <div class="practices-header">
+            <div class="search-container">
+              <i class="pi pi-search"></i>
+              <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search practices by name, sector, or district..." 
+                [(ngModel)]="searchQuery"
+                (input)="searchPractices(searchQuery)"
+              >
+            </div>
+          </div>
+
+          <div class="practices-grid">
+            <div *ngFor="let practice of filteredPractices" class="practice-card">
+              <div class="practice-card-image">
+                <img [src]="getPracticeImage(practice.bestpractice)" [alt]="practice.bestpractice" onerror="this.src='https://via.placeholder.com/400x300?text=Practice'">
+                <div class="practice-overlay">
+                  <span class="practice-badge">{{ practice.sector }}</span>
+                </div>
+              </div>
+              <div class="practice-card-content">
+                <h3>{{ practice.bestpractice }}</h3>
+                <div class="practice-meta">
+                  <span class="meta-item">
+                    <i class="pi pi-map-marker"></i>
+                    {{ practice.district }}
+                  </span>
+                  <span class="meta-item">
+                    <i class="pi pi-folder"></i>
+                    {{ practice.sector }}
+                  </span>
+                </div>
+                <div class="practice-footer">
+                  <button class="view-btn">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="filteredPractices.length === 0" class="no-data">
+            <p *ngIf="bestPractices.length === 0">📭 No best practices available</p>
+            <p *ngIf="bestPractices.length > 0">🔍 No practices match your search</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Policies Tab -->
+      <div class="tab-pane" *ngIf="activeTab === 1" [@slideIn]>
+        <div class="tab-panel-card">
+
+          
+          <div class="tab-content">
+            <p class="tab-description">Linked policies and regulatory frameworks</p>
+            
+            <div class="details-section">
+              <ul class="policy-list" *ngIf="policies.length > 0">
+                <li *ngFor="let policy of policies" class="policy-item">
+                  <div class="policy-info">
+                    <span class="policy-name">{{ policy.policy }}</span>
+                    <span class="policy-count">{{ policy.count }} practices</span>
+                  </div>
+                  <div class="policy-indicator">{{ policy.count }}</div>
+                </li>
+              </ul>
+              <div *ngIf="policies.length === 0" class="no-data">
+                <p>📭 No policies available</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data & Statistics Tab -->
+      <div class="tab-pane" *ngIf="activeTab === 2" [@slideIn]>
+        <div class="tab-panel-card">
+          
+          <div class="tab-content">
+            <p class="tab-description">Key statistics and data insights</p>
+            
+            <div class="details-section">
+              <div class="stats-grid">
+                <div class="stat-card stats-practices">
+                  <div class="stat-icon">📚</div>
+                  <div class="stat-value">{{ dataStats.totalPractices }}</div>
+                  <div class="stat-label">Total Practices</div>
+                </div>
+                <div class="stat-card stats-sectors">
+                  <div class="stat-icon">🏢</div>
+                  <div class="stat-value">{{ dataStats.totalSectors }}</div>
+                  <div class="stat-label">Sectors Covered</div>
+                </div>
+                <div class="stat-card stats-districts">
+                  <div class="stat-icon">📍</div>
+                  <div class="stat-value">{{ dataStats.totalDistricts }}</div>
+                  <div class="stat-label">Districts</div>
+                </div>
+                <div class="stat-card stats-policies">
+                  <div class="stat-icon">⚖️</div>
+                  <div class="stat-value">{{ dataStats.totalPolicies }}</div>
+                  <div class="stat-label">Policies</div>
+                </div>
+                <div class="stat-card stats-files">
+                  <div class="stat-icon">📁</div>
+                  <div class="stat-value">{{ dataStats.totalFiles }}</div>
+                  <div class="stat-label">Files</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </main>
+  </div>
+</section>

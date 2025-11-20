@@ -5,12 +5,14 @@ import { ExploreSectorComponent } from './components/explore-sector/explore-sect
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { AdminConsoleComponent } from './components/admin-console/admin-console.component';
 import { SectorDetailComponent } from './components/sector-detail/sector-detail.component';
+import { ProgrammesComponent } from './components/programmes/programmes.component';
 
 export const routes: Routes = [
 	{ path: '', component: SectionComponent },
 	{ path: 'best-practices', component: BestPracticesComponent },
 	{ path: 'explore', component: ExploreSectorComponent },
 	{ path: 'analytics', component: AnalyticsComponent },
+	{ path: 'programmes', component: ProgrammesComponent },
 	{ path: 'dashboard/:sector', component: SectorDetailComponent },
 	{ path: 'admin', component: AdminConsoleComponent }
 ];
